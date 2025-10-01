@@ -11,7 +11,7 @@ const productos = [producto1, producto2, producto3, producto4, producto5] // arr
 
 console.log(productos)
 
-const startAnterior = () => {
+const startV1 = () => {
     /* const obj = {
     // clave : valor
     // key : value
@@ -62,7 +62,7 @@ const startAnterior = () => {
     })
 }
 
-const start = () => {
+const startV2 = () => {
 
     const contenedor = document.getElementById('contenedor')
 
@@ -103,10 +103,67 @@ const start = () => {
         contenedor.appendChild(card)
 
     })
+    // Se ejecuta. Al terminar de cargarse el documento y ejecutarse todo lo que está arriba
+    //console.log(document.getElementsByTagName('h3')) // HTMLElement <--- 
+    //console.log(document.querySelectorAll('h3')) // Node <--- 
+}
+
+const start = () => {
+
+    const contenedor = document.getElementById('contenedor')
+
+    if ( contenedor ) {
+        console.warn('OK');
+    }
+
+    const fragmento = new DocumentFragment();
+    //console.dir(fragmento)
+
+    productos.forEach(producto => {
+    // console.log(producto);
+
+        // ! Creamos un elemnto dinamicamente
+        const card = document.createElement('div')
+        // console.log(card); // <div></div>
+        // ! Agregamos al div una clase
+        card.classList.add('card')
+
+        // ! Creamos elementos dinamicamente
+        const imagen = document.createElement('img')
+        const titulo = document.createElement('h3')
+        const precio = document.createElement('p')
+        const boton = document.createElement('button')
+
+        // ! Agregamos el contenido
+        imagen.src = producto.img
+        imagen.alt = producto.nombre
+        titulo.textContent = producto.nombre
+        precio.textContent = `Precio: $${producto.precio}`
+        boton.classList.add('btn')
+        boton.textContent = 'Agregar'
+
+        // ! Agregamos los nodos a la card
+        card.appendChild(imagen)
+        card.appendChild(titulo)
+        card.appendChild(precio)
+        card.appendChild(boton)
+
+        // ! Agregamos al contenedor cada una de las card
+        fragmento.appendChild(card)
+
+    })
+    console.log(fragmento)
+    contenedor.appendChild(fragmento)
+    // Se ejecuta. Al terminar de cargarse el documento y ejecutarse todo lo que está arriba
+    //console.log(document.getElementsByTagName('h3')) // HTMLElement <--- 
+    //console.log(document.querySelectorAll('h3')) // Node <--- 
 }
 
 
 // Es un evento que el avisa a JS que está todo el documento html listo.
 document.addEventListener('DOMContentLoaded', start)
 
+// Ni bien se carga el script se ejecuta. Sin importar si el html termino de cargase.
+// console.log(document.getElementsByTagName('h3')) // HTMLElement <--- 
+// console.log(document.querySelectorAll('h3')) // Node <--- 
 
